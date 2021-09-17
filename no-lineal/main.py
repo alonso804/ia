@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def percentage(length, fraction):
+    return int(length * fraction / 100)
+
+
 class NoLineal:
     def __init__(self, x, y, p, alpha, epoch):
         self.x = x
@@ -10,6 +14,7 @@ class NoLineal:
         self.m = len(x)
         self.alpha = alpha
         self.epoch = epoch
+        # np.random.shuffle(xy)
 
     def hypothesis(self, xi, w, b):
         h = 0
