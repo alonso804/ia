@@ -8,21 +8,11 @@ def percentage(length, fraction):
 
 class NoLineal:
     def __init__(self, x, y, p, alpha, epoch):
-        self.x = []
-        self.y = []
+        self.x = x
+        self.y = y
         self.p = p
         self.alpha = alpha
         self.epoch = epoch
-        xy = []
-
-        for i in range(len(x)):
-            xy.append((x[i], y[i]))
-
-        np.random.shuffle(xy)
-
-        for i in range(len(xy)):
-            self.x.append(xy[i][0])
-            self.y.append(xy[i][1])
 
         self.xTrain = self.x[:percentage(len(x), 70)]
         self.xValidation = self.x[percentage(
@@ -105,14 +95,28 @@ class NoLineal:
 x = np.linspace(0, 1, num=100)
 y = [np.sin(i * 2 * 3.14) + np.random.normal(0, 0.1) for i in x]
 
+tempX = []
+tempY = []
+
+xy = []
+
+for i in range(len(x)):
+    xy.append((x[i], y[i]))
+
+np.random.shuffle(xy)
+
+for i in range(len(xy)):
+    tempX.append(xy[i][0])
+    tempY.append(xy[i][1])
+
 # plt.plot(x, y, '*')
 # plt.show()
 
-noLineal = NoLineal(x, y, 2, 0.1, 200)
+noLineal = NoLineal(tempX, tempY, 2, 0.001, 200)
 noLineal.train()
 
-noLineal1 = NoLineal(x, y, 2, 0.2, 200)
+noLineal1 = NoLineal(tempX, tempY, 2, 0.2, 200)
 noLineal1.train()
 
-noLineal2 = NoLineal(x, y, 2, 0.5, 200)
+noLineal2 = NoLineal(tempX, tempY, 2, 0.5, 200)
 noLineal2.train()

@@ -67,7 +67,7 @@ def train(alfa, umbral):
         ciclos += 1
     for i in var_depen:
         print(i)
-    # ploteo(a,b)
+    # (var_depen, b)
 
 
 train(0.0005, 0.1)
