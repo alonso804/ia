@@ -38,6 +38,7 @@ class NoLineal:
             h += w[i] * (xi ** (i + 1))
 
         h += b
+
         return h
 
     def error(self, w, b, x):
@@ -65,7 +66,7 @@ class NoLineal:
         for j in range(len(w)):
             for i in range(m):
                 dw[j] += (self.y[i] - self.hypothesis(x[i], w, b)) * \
-                    (-x[i] ** (j + 1))
+                    -x[i] ** (j + 1)
 
             dw[j] /= m
 
@@ -102,13 +103,20 @@ class NoLineal:
             errorListTest.append(errTest)
             errorListValidation.append(errValidation)
 
+        """
+        print(w, b)
+        ys = [self.hypothesis(xi, w, b) for xi in self.x]
+        print(self.x)
+        print(ys)
+        print()
+        """
         ys = [self.hypothesis(xi, w, b) for xi in self.xTrain]
-        #plt.plot(self.x, self.y, '*')
-        #plt.plot(self.xTrain, ys)
+        plt.plot(self.x, self.y, '*')
+        plt.plot(self.xTrain, ys, '*')
 
-        plt.plot(errorListTrain)
+        # plt.plot(errorListTrain)
         # plt.plot(errorListTest)
-        plt.plot(errorListValidation)
+        # plt.plot(errorListValidation)
         plt.show()
 
 
@@ -129,13 +137,14 @@ for i in range(len(xy)):
     tempX.append(xy[i][0])
     tempY.append(xy[i][1])
 
-# (x, y, p, alpha, epoch, lambd):
 #noLineal = NoLineal(tempX, tempY, 2, 0.025, 200, 1000)
-noLineal = NoLineal(tempX, tempY, 5, 0.01, 200, 1000, 2)
+#                  (x, y, p, alpha, epoch, lambd, degree)
+noLineal = NoLineal(tempX, tempY, 5, 0.0024, 50000, 8, 2)
+# noLineal = NoLineal(tempX, tempY, 2, 0.025, 200, 200, 2)
 noLineal.train()
 
 noLineal1 = NoLineal(tempX, tempY, 5, 0.025, 200, 100, 2)
-noLineal1.train()
+# noLineal1.train()
 
 noLineal2 = NoLineal(tempX, tempY, 2, 0.025, 200, 100, 2)
-noLineal2.train()
+# noLineal2.train()
