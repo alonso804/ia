@@ -140,8 +140,12 @@ for i in range(len(xy)):
 #noLineal = NoLineal(tempX, tempY, 2, 0.025, 200, 1000)
 #                  (x, y, p, alpha, epoch, lambd, degree)
 noLineal = NoLineal(tempX, tempY, 5, 0.0024, 50000, 8, 2)
-# noLineal = NoLineal(tempX, tempY, 2, 0.025, 200, 200, 2)
-noLineal.train()
+# noLineal = NoLineal(tempX, tempY, 10, 0.001, 3500, 100, 2)
+# noLineal.train()
+# p = 5
+# alpha = 0.0024
+# epoch = 50000
+# lambda = 8
 
 noLineal1 = NoLineal(tempX, tempY, 5, 0.025, 200, 100, 2)
 # noLineal1.train()
