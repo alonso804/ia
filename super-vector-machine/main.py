@@ -1,33 +1,30 @@
+
 import numpy as np
+from regression import SVM
+import csv
 
+clasification = {
+  "Iris-setosa": 1,
+  "Iris-versicolor": -1
+}
 
-class SVM:
-    def __init__(self, x, y, alpha, epoch):
-        self.x = x
-        self.y = y
-        self.alpha = alpha
-        self.epoch = epoch
+def passData(fileName):
+    x = []
+    y = []
 
-    def derivative(self, lamb, x):
-        n = len(self.y)
-        dw = [0] * k
-        db = 0
-        for i in range(n):
-            for j in range(k):
-                dw += lamb*(self.y[i])*x[j]
+    with open(fileName) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            x.append(list(map(float,[row['A'], row['B'],row['C'],row['D']])))
 
-    def train(self):
-        w = [np.random.rand() for i in range(len(self.x))]
-        b = np.random.rand()
+            y.append(float(clasification[row['CLASS']]))
 
-        for i in range(self.epoch):
-            p = np.random(0, len(self.x))
-            x = self.x[p]
-            y = self.y[p]
+    return np.array(x), np.array(y)
 
-            for i in range(len(w)):
-                if y[i] * (np.dot(w, x) + b) >= 1:
-                    w[i] -= self.alpha * w[i]
-                else:
-                    w[i] -= self.alpha * (w[i] - y[i] * x[i])
-                    b -= self.alpha * (-self.y[i])
+if __name__ == "__main__":
+    x,y =  passData('iris.csv')
+    epoch = 10000
+    alpha = 0.01
+    C = 1
+    svm = SVM(x,y,epoch,alpha,C)
+    svm.train()
